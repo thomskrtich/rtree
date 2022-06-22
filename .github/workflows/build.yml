@@ -9,7 +9,7 @@ on:
 jobs:
   black:
     name: black
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
@@ -106,7 +106,7 @@ jobs:
     - uses: actions/setup-python@v2
       name: Install Python
       with:
-        python-version: '3.10'
+        python-version: '3.9'
     - name: Setup
       shell: bash -l {0}
       run: |
@@ -174,7 +174,7 @@ jobs:
 
   wheels_aarch64:
     name: Build wheel on aarch64 for ${{ matrix.python_tag }}
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       matrix:
        python_tag: [ "cp37-*", "cp38-*", "cp39-*", "cp310-*"]
