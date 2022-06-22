@@ -9,7 +9,7 @@ on:
 jobs:
   black:
     name: black
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
@@ -22,7 +22,7 @@ jobs:
 
   flake8:
     name: flake8
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
@@ -35,7 +35,7 @@ jobs:
 
   isort:
     name: isort
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
@@ -48,7 +48,7 @@ jobs:
 
   mypy:
     name: mypy
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
@@ -177,7 +177,7 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-       python_tag: [ "cp37-*", "cp38-*", "cp39-*", "cp310-*"]
+       python_tag: [ "cp39-*"]
     env:
       CIBW_ARCHS_LINUX: aarch64
       CIBW_BUILD: ${{matrix.python_tag}}
@@ -208,7 +208,7 @@ jobs:
     name: Package and push release
 
     #needs: [windows-wheel, linux-wheel, osx-wheel, conda, ubuntu]
-    needs: [conda, ubuntu, wheels]
+    needs: [wheels, wheels_aarch64]
 
     runs-on: 'ubuntu-latest'
     strategy:
